@@ -15,6 +15,7 @@ impl Sudoku {
 
 
         for x in sudoku.chars(){
+            // converting ex. 0 char to 0 unsigned 8bit int
             b[i][j] =  (x as u8) - ('0' as u8);
             j += 1;
             if j == 9 {
@@ -46,17 +47,17 @@ impl Sudoku {
 
         for i in 0..9{
             if self.board[row][i] == val ||
-               self.board[i][col] == val || 
+               self.board[i][col] == val ||
+               // Check specific sudoku(3x3) blocks
                self.board[from_row + (i / 3)][from_col + (i % 3)] == val {
                    return false;
                }
-        } 
+        }
 
         return true;
     }
 
     pub fn backtracking(&mut self) -> bool {
-
         let (find_empty, row, col) = self.find_empty_cell();
         if !find_empty {
             self.string();
@@ -106,7 +107,4 @@ fn main() {
             }
         }
     }
-
-
-
 }
